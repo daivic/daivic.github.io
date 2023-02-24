@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>WebReg by Zotty Hotties</title>
+  <link rel="icon" type="image/x-icon" href="icon.png">
+  <link rel="stylesheet" href="toastui-calendar.min.css" />
+<script src="toastui-calendar.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial;
+  color: rgb(0, 0, 0);
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+
+.header {
+  text-align: right;
+  background: #0064a4;
+  width: 100%;
+  height: 100px;
+  font-size: 30px;
+  overflow-x: hidden;
+}
+
+hr.solid {
+  top: 89px;
+  width: 100%;
+  border: 3px solid #dfba00;
+  position:absolute;
+
+  z-index: 2;
+}
+
+#term{
+  z-index: 3;
+  position:absolute;
+  margin:auto;
+  top: 60px;
+  right: 20px;
+  height: 20px;
+  text-align:right;
+  font-weight:bold;
+  color: white;
+  width: 30%;
+  font-size:18px;
+}
+
+
+.split {
+  
+  height: 100%;
+  width: 50%;
+  position:fixed;
+  z-index: 1;
+  top: 100px;
+  overflow-x: hidden;
+}
+
+
+.left {
+  left: 0;
+  background-color: white;
+  overflow-y: hidden;
+
+}
+
+ #map {
+  margin-top: 5px;
+   width: 100%;
+   height: 550px;
+   background-color: #1b3d6d;
+ }
+
+.right {
+  right: 0;
+  background-color: white;
+  overflow-y: auto;
+}
+
+#window{
+  text-align:center;
+  margin:auto;
+  width: 100%;
+  height:230px;
+  font-size:15px;
+  border:solid 1px #b0b0b0;
+}
+
+#ewindow{
+  line-height: 28px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  font-size: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.5);
+  position:absolute;
+  margin-top: 50px;
+  left: 18%;
+  z-index: 3;
+  width:  230px;
+  height: 130px;
+  background-color: #fff0a3;
+}
+
+#fwindow{
+  line-height: 28px;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  font-size: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 20px 2px rgba(0, 0, 0, 0.5);
+  float:right;
+  margin-top: 50px;
+  margin-right: 15%;
+  z-index: 3;
+  width:  230px;
+  height: 130px;
+  background-color: #bcdac0;
+}
+
+.enroll{
+  margin-left: 5%;
+}
+
+#wtitle{
+  margin-top: 7px;
+  font-size: 21px;
+  font-weight: bold;
+}
+
+
+.enrolldate{
+  font-size:18px;
+}
+.enrolltime{
+  font-size: 18px;
+}
+
+#timer{
+  font-size:18px;
+}
+
+#empty{
+  font-size:14px;
+  color: rgb(70, 70, 70);
+  margin: 10px;
+  font-weight:bold;
+}
+
+.marker-position{
+  font-size: 12px;
+  bottom: 20px;
+    left: 0;
+    position: relative;
+    font-weight:bold;
+    
+}
+
+
+.collapsible {
+
+  background-color: #1b3d6d;
+  color: white;
+  cursor: pointer;
+  padding: 2.5%;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.active, .collapsible:hover {
+  background-color: #0064a4;
+
+}
+
+.content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .5s ease-out;
+  background-color: #f1f1f1;
+}
+
+.collapsible:after {
+  content: "+"; /* Unicode character for "plus" sign (+) */
+  font-size: 20px;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "-"; /* Unicode character for "minus" sign (-) */
+}
+.tab {
+  overflow: hidden;
+  background-color: #1b3d6d;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+
+  height: 40px;
+  width: 33.333%;
+  background-color: inherit;
+  float: left;
+  border:  #1b3d6d;
+  outline: black;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  color:white;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #0064a4;
+}
+
+/* Create an active/current tablink class */
+.tab button.selected {
+  background-color: #0064a4;
+  border: 4px solid #6aa2b8
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 2% 2%;
+  border: 1px solid #ccc;
+  height:94%;
+  border-top: none;
+}
+
+
+
+
+
+
+
+
+/* The sidepanel menu */
+.sidepanel {
+
+
+
+height: 400px; /* Specify a height */
+width: 0; /* 0 width - change this with JavaScript */
+position: absolute; /* Stay in place */
+z-index: 5; /* Stay on top */
+
+
+border-radius: 5%;
+box-shadow: 5% 5% 2% rgb(164, 164, 164);
+
+/* background-color: rgba(95, 169, 247, 0.75);  */
+background-color: #6e6e6e;
+overflow-x: hidden; /* Disable horizontal scroll */
+overflow-y: hidden;
+padding-top:0px; /* Place content 60px from the top */
+margin:0px;
+/* transition: 0.6s;  */
+}
+
+
+
+
+/* When you mouse over the navigation links, change their color */
+
+
+/* Position and style the close button (top right corner) */
+.sidepanel .closebtn {
+  color: white;
+  position: absolute;
+  top: 1%;
+  right: 3%;
+  font-size: 30px;
+  margin-left: 0px;
+}
+.closebtn:hover{
+  color: rgb(218, 14, 14);
+}
+
+.openbtn {
+  background:transparent url(peterwave.svg) no-repeat left;
+  position: fixed;
+  cursor: pointer;
+  z-index: 4;
+  /* background: transparent; */
+  right: 0px;
+  bottom: 0px;
+  /* padding: 5px 5px; */
+  margin-right: 0.1%;
+  margin-bottom: 1%;
+  border: none;
+  height:110px;
+  width: 110px;
+
+}
+
+.openbtn:hover  {
+  background:transparent url(/peterwavehover.svg) no-repeat left;
+  position: fixed;
+  margin-right: 0.1%;
+  margin-bottom: 1%;
+  z-index:4 ;
+  font-size: 20px;
+  cursor: pointer;
+  right: 0px;
+  bottom: 0px;
+  border: none;
+  height:150px;
+  width: 262px;
+  
+}
+
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #cacaca;
+  height: 50px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+  background-color: transparent;
+}
+
+
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+body {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 13px;
+	background-color: #183661!important;
+}
+
+.container {
+	width: 100%;
+  margin-top: 0px;
+  height: 82%;
+  cursor: move;
+  z-index:10;
+
+}
+
+.chat {
+	height: 93%;
+  border-radius:5%;
+  margin-top:15%;
+  margin-left: 5%;
+  margin-right: 5%;
+	overflow-y: auto;
+	background-color: rgba(255, 255, 255, 0.855)!important;
+}
+
+.chat div {
+	margin: 10px 12px 15px;
+	line-height: 20px;
+}
+
+.chat .party {
+  display: flex;
+    /* float: left; */
+	font-weight: normal;
+}
+
+
+.chat .you {
+  float: right;
+  border-radius: 15px;
+  background-color:#0064a4;
+  max-width:80%;
+  padding: 10px 15px;
+	color: white!important;
+}
+
+.chat .other {
+  float:left;
+  border-radius: 15px;
+  background-color:#c6beb5;
+  max-width: 80%;
+  padding: 10px 15px;
+	color: black!important;
+}
+
+.chat .after {
+  width:100%;
+}
+
+.busy {
+	position: absolute;
+  font-family:'Arial';
+  font-weight:bold;
+	padding: 5% 0;
+  bottom: 7%;
+  margin-left: 5%;
+
+	color: black;
+	display: none;
+	font-size: 13px;
+}
+
+
+.input {
+  margin-top: 4%;
+}
+
+.input input {
+  z-index: 11;
+	vertical-align: top;
+	float: left;
+	border: 1px solid #ccc;
+	padding: 5px;
+	width: 65%;
+	margin-left: 7%;
+	border-radius: 5px;
+	background: #fff;
+	color: black;
+}
+
+.input a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	float: right;
+  width: 15%;
+	border: 2px solid #ccc;
+	background-color: #0064a4;
+	padding: 2% 5%;
+  margin-right: 7%;
+  margin-bottom: 9%;
+	color: black;
+	text-decoration: none;
+	border-radius: 5px;
+	color: #fff;
+}
+
+.input a:hover {
+
+	background-color: #6aa2b8;
+  border: solid 2px;
+	cursor: pointer;
+	color: white;
+  
+}
+.text{
+	color: #fff;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 97%;
+}
+
+
+
+
+#socTable{
+  inherits: table;
+  display:block;
+  height: 70vh;
+  overflow-y: auto;
+  overflow-x: auto;
+  margin-top: 3%;
+  margin-left: 1.5%;
+}
+#socInput {
+  margin-top: 1.15%;
+  margin-left: 1.5%;
+  width: 97%;
+  font-size: 16px;
+  padding: 12px 20px 12px 12px;
+  border: 2px solid #b0b0b0;
+  border-radius: 5px;
+  background-color: rgb(225, 225, 225);
+}
+
+td {
+  border: 1px solid rgb(255, 255, 255);
+  text-align: left;
+  padding: 8px;
+
+}
+
+th{
+  z-index: 25;
+  position: sticky; top: 0;
+  background-color: #183661;
+  color: white;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #c7dbff;
+}
+tr:nth-child(odd){
+
+  background-color: #fef4ce;
+}
+
+tr:nth-child(even):hover {
+  background-color: rgb(217, 255, 217);
+}
+tr:nth-child(odd):hover{
+
+  background-color: rgb(217, 255, 217);
+}
+
+
+.addsave-button{
+	background-color: transparent;
+  border:none;
+	color:  rgb(70, 70, 70);
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	height: 100%; 
+	padding: 0 0px;
+  margin:none;
+	align-items: center;
+}
+
+.addsave-button:hover {
+	color:  gold;
+  
+}
+
+.removesave-button{
+  background-color: rgb(189, 0, 0);
+  border:none;
+  border-radius: 15%;
+	color:  white;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	height: 100\%; 
+	padding: 8 8px;
+  margin: none;
+	align-items: center;
+}
+
+.removesave-button:hover{
+  background-color: red;
+}
+
+.enroll-button{
+	background-color: green;
+  border:none;
+  margin: none;
+  border-radius: 15%;
+	color:  white;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	height: 100%; 
+	padding: 8 8px;
+	align-items: center;
+}
+
+.enroll-button:hover{
+  background-color:rgb(70, 231, 70);
+}
+
+.markercontent{
+  height: 10px;
+}
+
+
+#blank{
+  height:120px;
+}
+
+#halfblank{
+  height: 21px;
+}
+
+
+@keyframes fadeout {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+.modal {
+  background: rgba(225, 239, 202, 0.7);
+  font: Arial;
+  font-weight: bold;
+  position: absolute;
+  top: 45%;
+  left: 23%;
+  height: 50px;
+  line-height: 50px; 
+  width: 500px;
+  z-index: 20;
+  border-radius: 10px;
+  border: solid 2px green;
+  text-align: center;
+
+}
+
+
+.scene {
+  display: inline-block;
+  width: 200px;
+  height: 80px;
+  margin: 0px 0px;
+  perspective: 600px;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transform-origin: 50% 50%;
+  transition: transform 1s;
+
+  
+}
+
+.card.is-flipped {
+  transform:  rotateY(3.142rad );
+}
+
+.card__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  line-height: 25px;
+  color: white;
+  margin:0;
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  backface-visibility: hidden;
+  border-radius: 10px;
+}
+
+.card__face--front {
+  background: #6aa2b8;
+  border-style: double;
+  border-color: #dfba00;
+  border-radius: 2px;
+  
+}
+.popupbox:hover span {
+  transform: translateY(10%) scale(1);
+}
+
+.popupbox {
+  position: relative;
+}
+
+.details {
+  position: absolute;
+  top: 0;
+  transform: translateY(70%) scale(0);
+  transition: transform 0.1s ease-in;
+  transform-origin: left;
+  display: inline;
+  background: white;
+  z-index: 20;
+  padding: 1rem;
+  border: 1px solid black;
+}
+
+.popupbox:hover span {
+  transform: translateY(10%) scale(1);
+}
+
+.card__face--back {
+  background: #6aa2b8;
+  border-style: double;
+  border-color: #dfba00;
+  border-radius: 2px;
+
+  
+  font-size: 12px;
+  transform: rotateY(-3.142rad );
+}
+
+
+
+
+</style>
+
+
+</head >
+
+<body class = "homepage">
+
+  <hr class = "solid"></hr>
+  
+  <div id = "term">Week 7  |  Winter Quarter  |  2023</div>
+
+
+<header style="background-color:#1b3d6d; border: #1b3d6d;position: relative;top: -165px; left: -50px; width: 150%; overflow-x: hidden;">
+  <div >
+    <a href="https://www.reg.uci.edu/access/student/welcome/"><img src="webreg.svg" height="400px" alt="University of California, Irvine"/></a>	
+  </div>
+    
+  <div class="modalholder">
+
+  </div>
+</header>
+
+
+<body>
+
+ 
+
+
+ 
+<div class="split left">
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      </head>
+      <body>
+      <div class="tab">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <button class="tablinks" id = "autoclass" onclick="openCity(event, 'Schedule')"><i class="fa fa-search"></i>  Classes</button>
+        
+        <button class="tablinks"onclick="openCity(event, 'Calendar')"><i class="fa fa-calendar"></i>  Calendar</button>
+        <button class="tablinks"onclick="openCity(event, 'Map')"><i class="fa fa-map-marker"></i>  Map</button>
+
+
+      </div>
+      
+      <div id="Schedule" class="tabcontent">
+
+        <div class = "courselist">
+            
+          <!-- rendering done in soc.js -->
+          <script>
+            function socFunction() {
+              var input, filter, table, tr, td, i, txtValue;
+              input = document.getElementById("socInput");
+              filter = input.value.toUpperCase();
+              table = document.getElementById("socTable");
+              tr = table.getElementsByTagName("tr");
+              for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                }       
+              }
+            }
+            </script>
+          
+        </div>
+
+      </div>
+
+      <div id="popup" style="display: none;">
+        <h2 id="popup-title"></h2>
+        <p id="popup-content"></p>
+      </div>
+
+    
+
+      
+
+
+      <!-- MAP -->
+
+      <div id="Map" class="tabcontent">
+        
+
+      
+        <div id = "map" color = "white">Sorry! Refresh to view map :(</div>
+          <div class="mapclass">
+      
+            <script async defer
+              src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCXRyboGJ_x7Zh3UfvyjyvZYqAD-WJbIME&callback=initMap">
+              </script>
+
+              <script src="map.js" type="text/javascript"></script>
+
+          </div>
+      </div>
+
+
+
+
+      
+      <div id="Calendar" class="tabcontent">
+        <div id="calendar" style="height: 100%; min-height: 100%"></div>
+
+      </div>
+      
+      <script>
+      function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" selected", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " selected";
+      }
+      </script>
+         
+      <!-- </body> -->
+</div>
+
+<div class="split right">
+  <!--  -->
+
+  <!-- <div id = "window">
+    <div id = "ewindow"> 
+      <div id = "wtitle"> Enrollment Window</div>
+      <div class = "enrolldate"> Feb 28, 2023</div>
+            <div class = "enrolltime"> 3:00 PM PST</div>
+            <div id = "timer"></div>
+
+    </div>
+    <div id = "fwindow"> 
+      <div id = "wtitle"> Fee Status</div>
+      <div id = "halfblank"> </div>
+
+      <div id = "timer"> Complete <i class="fa fa-check-circle" height = "100px">  </i>
+      </div>
+
+      </div>
+
+  </div> -->
+
+
+
+
+  <button id = "savedid" class="collapsible" id="savedbtn"><i class="fa fa-bookmark"></i> Saved</button>
+    <div class="content">
+      <div class="saved">
+        <div id = 'empty'> No saved classes.</div>
+      <!-- implemented in soc -->
+
+      </div>
+    </div>
+  <button id = "enrolledid" class="collapsible"><i class="fa fa-check"></i>  Enrolled</button>
+    <div class="content" >
+      <div class="enrolled" >
+        <div id = 'empty'> No enrolled classes.</div>
+
+      <!-- implemented in soc -->
+  
+      </div>
+    </div>
+ <button id = "wlid" class="collapsible"><i class="fa fa-clock-o"></i>  Waitlist</button>
+  <div class="content">
+    <div id = 'empty'> No waitlisted classes.</div>
+  </div>
+
+  <div id = "blank"></div>
+ 
+  </div>
+  
+
+</div>
+     
+<script>
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+  
+  for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+      if (content.style.maxHeight){
+        content.style.maxHeight = null;
+      } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+      } 
+    });
+  }
+  </script>
+
+<script>
+  document.getElementById("autoclass").click();
+  document.getElementById("savedid").click();
+
+  document.getElementById("enrolledid").click();
+  document.getElementById("wlid").click();
+
+  
+
+</script>
+
+<script>
+  // Set the date we're counting down to
+  var countDownDate = new Date("Feb 28, 2023 15:00:00").getTime();
+  
+  // Update the count down every 1 second
+  var x = setInterval(function() {
+  
+    // Get today's date and time
+    var now = new Date().getTime();
+  
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
+  
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+    // Display the result in the element with id="demo"
+    document.getElementById("timer").innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+  
+    // If the count down is finished, write some text
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("timer").innerHTML = "Time to enroll!";
+    }
+  }, 1000);
+  </script>
+
+
+
+ <!-- CHAT BOT! -->
+
+ <div id="mySidepanel" class="sidepanel" >
+  <div class="container" id = "panelHeader">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fa fa-close"></i></a>
+
+    <div class="chat">
+      <div class="busy"></div>
+
+    </div>
+
+    <div class="input">
+      <input type="text" placeholder="Chat with Peter!" />
+      <a><i class="fa fa-send"></i></a>
+    </div>
+  </div>
+  
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js'></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+ 
+</div>
+
+<button class="openbtn" onclick="openNav()"> </button>
+
+
+<!-- DRAG CHAT -->
+<script>
+  //Make the DIV element draggable:
+  dragElement(document.getElementById("mySidepanel"));
+
+
+
+  function dragElement(elmnt) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    if (document.getElementById("container")) {
+      /* if present, the header is where you move the DIV from:*/
+      document.getElementById("container").onmousedown = dragMouseDown;
+    } else {
+      /* otherwise, move the DIV from anywhere inside the DIV:*/
+      elmnt.onmousedown = dragMouseDown;
+    }
+  
+    function dragMouseDown(e) {
+      e = e || window.event;
+      // e.preventDefault();
+      // get the mouse cursor position at startup:
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeDragElement;
+      // call a function whenever the cursor moves:
+      document.onmousemove = elementDrag;
+    }
+  
+    function elementDrag(e) {
+      e = e || window.event;
+      e.preventDefault();
+      // calculate the new cursor position:
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+ 
+
+      elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+      elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
+  
+    function closeDragElement() {
+      /* stop moving when mouse button is released:*/
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+  }
+  </script>
+
+ 
+  
+
+<script src="./courses.js"></script>
+<script src="./soc.js"></script>
+<script src="./calendar.js"></script>
+
+<script src ="./main.js"></script>
+<script src="./gpatable.js"></script>
+<script src="https://unpkg.com/@googlemaps/markerwithlabel/dist/index.min.js"></script>
+
+</body>
+</html>
