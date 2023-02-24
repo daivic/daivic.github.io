@@ -9,8 +9,8 @@ function renderCourses(){
     result += "<table id=\"socTable\">";
     result += "<tr>";
     result += "<th WIDTH=75>Code</th>";
-    result += "<th>Name</th>";
     result += "<th>Course</th>";
+    result += "<th>Name</th>";
 
     result += "<th>School</th>";
 
