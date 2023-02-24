@@ -19,6 +19,21 @@ function initMap() {
       latLngBounds: UCI_BOUNDS,
       strictBounds: false,
     },
+    mapTypeId:google.maps.MapTypeId.ROADMAP,
+    styles: [ 
+      { 
+        "featureType": "poi", 
+        "stylers": [ 
+          { "visibility": "off" } 
+        ] 
+      },
+      {
+        "featureType": "poi.park",
+        "stylers": [
+          { "visibility": "simplified"}
+        ]
+      }
+    ]
     
   });
 

@@ -10,6 +10,8 @@ function renderCourses(){
     result += "<tr>";
     result += "<th WIDTH=75>Code</th>";
     result += "<th>Name</th>";
+    result += "<th>Course</th>";
+
     result += "<th>School</th>";
 
     result += "<th>Professor</th>";
@@ -22,13 +24,16 @@ function renderCourses(){
         
         result += "<td><button class='addsave-button' onclick = 'addToSaved(" + JSON.stringify(course) + ")'><i class='fa fa-bookmark'></i> </button> "+course.code+"</td>";
         result += "<td>"+course.name+"</td>";
+        result += "<td>"+course.title+"</td>";
         result += "<td>"+course.school+"</td>";
-        result += "<td class = 'popupbox'>"+course.instructor+"<span class = 'details'>";
+        result += "<td>"+course.instructor+"</td>";
+
+        /*result += "<td class = 'popupbox'>"+course.instructor+"<span class = 'details'>";
         if (course.instructor == "STAFF") {
             result += "Professor Not Found";
         } else {
             result += "<img src='download.png' alt='Doughnut' width='100' height='100'>";
-        }
+        }*/
 
         result += "</td>";
         result += "<td>"+course.building+"</td>";
@@ -118,7 +123,8 @@ function renderSaved(){
 
         
         result += "<td>"+course.code+"</td>";
-        result += "<td>"+course.name+"</td>";
+        result += "<td>"+course.title+"</td>";
+
         result += "<td>"+course.school+"</td>";
         result += "<td>"+course.instructor+"</td>";
         result += "<td>"+course.building+"</td>";
@@ -172,7 +178,8 @@ function renderEnrolled(){
     enrolled.forEach( (course) => {
 
         result += "<td>"+course.code+"</td>";
-        result += "<td>"+course.name+"</td>";
+        result += "<td>"+course.title+"</td>";
+
         result += "<td>"+course.school+"</td>";
 
         result += "<td>"+course.instructor+"</td>";
