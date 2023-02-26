@@ -68,37 +68,33 @@ function animateMapZoomTo(map, targetZoom) {
 
 
 function addMarker(location, title, name, code){
-  geocoder.geocode({'address': location}, function(results, status) {
-  var latLng = {lat: results[0].geometry.location.lat (), lng: results[0].geometry.location.lng ()};
-  if (status === 'OK') {
-    var marker = new google.maps.Marker({
-      position: latLng,
-      map: map,
-      title: title,
+  if(location == "UCI ON LINE"){
+
+  }else{
+    geocoder.geocode({'address': location}, function(results, status) {
+    var latLng = {lat: results[0].geometry.location.lat (), lng: results[0].geometry.location.lng ()};
+    if (status === 'OK') {
+      var marker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+        title: title,
+      });
+
+      marker.addListener("click", () => {
+        map.panTo(marker.getPosition());
+        animateMapZoomTo(map, 20);
       
-      // label:{
-      //   text: name,
-      //   fontSize: '12px',
-      //   className: 'marker-position',
-      //   color:'rgb(188, 14, 14)',
+      });
+      
+      
+      hm.set(code, marker);
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
 
-      // }
-    });
-
-    marker.addListener("click", () => {
-      map.panTo(marker.getPosition());
-      animateMapZoomTo(map, 20);
     
     });
-    
-    
-    hm.set(code, marker);
-  } else {
-    alert('Geocode was not successful for the following reason: ' + status);
   }
-
-  
-  });
 }
 function removeMarker(code){
   hm.get(code).setMap(null);
