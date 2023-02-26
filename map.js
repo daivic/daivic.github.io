@@ -68,7 +68,7 @@ function animateMapZoomTo(map, targetZoom) {
 
 
 function addMarker(location, title, name, code){
-  if(location == "UCI ON LINE"){
+  if(location == "UCI ON"){
 
   }else{
     geocoder.geocode({'address': location}, function(results, status) {
