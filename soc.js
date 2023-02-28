@@ -158,7 +158,7 @@ function addToEnrolled(course){
         enrolled.push(course);
         removeFromSaved(course);
         renderEnrolled();
-        var address = "UCI "+ course.building.substring(0, str.indexOf(' '));; 
+        var address = "UCI "+ course.building; 
         var title = course.building;
         addMarker(address, title, course.name, course.code); 
         addAllClasses(course);
