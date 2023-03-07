@@ -77,32 +77,32 @@ function getTimes(time, code, building, name, instructor,  colored){
     }
     // month in date object is index 0 based so Jan = 0, feb = 1
     if (days.includes('M')) {
-        const startDate = new Date(2023, 1, 27, startHourF, startMin);
-        const endDate = new Date(2023, 1, 27, endHourF, endMin);
+        const startDate = new Date(2023, 2, 6, startHourF, startMin);
+        const endDate = new Date(2023, 2, 6, endHourF, endMin);
         calendar.createEvents([{id: String(code), calendarId: "cal1", title: name, start: startDate, end: endDate, location: building, body: instructor, backgroundColor: colored, }]);    
         } 
     if(days.includes('Tu')) {
         //  block of code to be executed if the condition is false
-        const startDate = new Date(2023, 1, 28, startHourF, startMin);
-        const endDate = new Date(2023, 1, 28, endHourF, endMin);
+        const startDate = new Date(2023, 2, 7, startHourF, startMin);
+        const endDate = new Date(2023, 2, 7, endHourF, endMin);
         calendar.createEvents([{id: String(code), calendarId: "cal1", title: name, start: startDate, end: endDate, location: building, body: instructor,backgroundColor: colored,}]);    
     }
     if(days.includes('W')) {
         //  block of code to be executed if the condition is false
-        const startDate = new Date(2023, 2, 1, startHourF, startMin);
-        const endDate = new Date(2023, 2, 1, endHourF, endMin);
+        const startDate = new Date(2023, 2, 8, startHourF, startMin);
+        const endDate = new Date(2023, 2, 8, endHourF, endMin);
         calendar.createEvents([{id: String(code), calendarId: "cal1", title: name, start: startDate, end: endDate, location: building,body: instructor, backgroundColor: colored,}]);    
     }
     if(days.includes('Th')) {
         //  block of code to be executed if the condition is false
-        const startDate = new Date(2023, 2, 2, startHourF, startMin);
-        const endDate = new Date(2023, 2, 2, endHourF, endMin);
+        const startDate = new Date(2023, 2, 9, startHourF, startMin);
+        const endDate = new Date(2023, 2, 9, endHourF, endMin);
         calendar.createEvents([{id: String(code), calendarId: "cal1", title: name, start: startDate, end: endDate, location: building, body: instructor, backgroundColor: colored,}]);    
     }
     if(days.includes('F')) {
         //  block of code to be executed if the condition is false
-        const startDate = new Date(2023, 2, 3, startHourF, startMin);
-        const endDate = new Date(2023, 2, 3, endHourF, endMin);
+        const startDate = new Date(2023, 2, 10, startHourF, startMin);
+        const endDate = new Date(2023, 2, 10, endHourF, endMin);
         calendar.createEvents([{id: String(code), calendarId: "cal1", title: name, start: startDate, end: endDate, location: building, body: instructor,backgroundColor: colored,}]);    
         }
         calendar.render();
