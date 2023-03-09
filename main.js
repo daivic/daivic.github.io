@@ -162,6 +162,6 @@ function openNav() {
   
   
     updateChat(robot, "Hello! I'm Peter and can help answer your questions about registration.");
-    updateChat(robot, "What is your first and last name?");
+    updateChat(robot, "Here are some quicklinks to get you started!\n Office of Academic Advising: https://academicadvising.uci.edu/offices/ \nSchool Advising Offices: https://academicadvising.uci.edu/offices/ \nFinancial Aid and Scolarships: https://www.ofas.uci.edu/");
   
   });
