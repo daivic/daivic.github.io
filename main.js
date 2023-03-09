@@ -50,8 +50,11 @@ function openNav() {
       if (this.match('(how are you)'))
          return "I'm splendid. And you?";
       
-        if(this.match('(ok|okay)'))
+      if(this.match('(ok|okay)'))
         return "Ok."
+
+      if(this.match("(advising)"))
+        return "https://academicadvising.uci.edu/"
       if(this.match('(lol|lmao)'))
       return "I'm funny huh.";
 
@@ -162,6 +165,6 @@ function openNav() {
   
   
     updateChat(robot, "Hello! I'm Peter and can help answer your questions about registration.");
-    updateChat(robot, "Here are some quicklinks to get you started!\n Office of Academic Advising: https://academicadvising.uci.edu/offices/ \nSchool Advising Offices: https://academicadvising.uci.edu/offices/ \nFinancial Aid and Scolarships: https://www.ofas.uci.edu/");
+    updateChat(robot, "What do you need help with?");
   
   });
