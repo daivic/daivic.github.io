@@ -54,7 +54,7 @@ function openNav() {
         return "Ok."
 
       if(this.match("(advising)"))
-        return "https://academicadvising.uci.edu/"
+        return "academicadvising.uci.edu"
       if(this.match('(lol|lmao)'))
       return "I'm funny huh.";
 
